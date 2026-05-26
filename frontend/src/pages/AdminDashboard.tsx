@@ -37,7 +37,7 @@ const AdminDashboard: React.FC = () => {
   const handleUpdateStatus = async (id: number, status: string) => {
     try {
       await api.put(`/orders/${id}/status`, { status });
-      setSelectedOrder(prev => prev ? { ...prev, status } : null);
+      setSelectedOrder((prev: any) => prev ? { ...prev, status } : null);
       fetchDashboardData();
     } catch (err) {
       console.error(err);
@@ -47,7 +47,7 @@ const AdminDashboard: React.FC = () => {
   const handleProcessPayment = async (id: number) => {
     try {
       await api.put(`/orders/${id}/pay`);
-      setSelectedOrder(prev => prev ? { ...prev, paymentStatus: 'PAID' } : null);
+      setSelectedOrder((prev: any) => prev ? { ...prev, paymentStatus: 'PAID' } : null);
       fetchDashboardData();
     } catch (err) {
       console.error(err);
