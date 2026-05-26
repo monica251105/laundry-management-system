@@ -173,3 +173,15 @@ export const processPayment = async (req: Request, res: Response) => {
     res.status(400).json({ message: error.message });
   }
 };
+
+export const deleteOrder = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    await prisma.order.delete({
+      where: { id: parseInt(id as string) },
+    });
+    res.json({ message: 'Order deleted successfully' });
+  } catch (error: any) {
+    res.status(400).json({ message: error.message });
+  }
+};

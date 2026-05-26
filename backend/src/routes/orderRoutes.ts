@@ -5,7 +5,8 @@ import {
   getAllOrders,
   updateOrderStatus,
   cancelOrder,
-  processPayment
+  processPayment,
+  deleteOrder
 } from '../controllers/orderController';
 import { authenticateJWT, authorizeAdmin } from '../middlewares/authMiddleware';
 
@@ -20,5 +21,6 @@ router.put('/:id/cancel', authenticateJWT, cancelOrder);
 router.get('/all', authenticateJWT, authorizeAdmin, getAllOrders);
 router.put('/:id/status', authenticateJWT, authorizeAdmin, updateOrderStatus);
 router.put('/:id/pay', authenticateJWT, authorizeAdmin, processPayment);
+router.delete('/:id', authenticateJWT, authorizeAdmin, deleteOrder);
 
 export default router;
