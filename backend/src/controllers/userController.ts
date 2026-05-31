@@ -13,8 +13,6 @@ const customerCreateSchema = z.object({
 });
 
 const customerUpdateSchema = z.object({
-  email: z.string().email().optional(),
-  password: z.string().min(6).optional().nullable(),
   name: z.string().optional(),
   phone: z.string().optional().nullable(),
   address: z.string().optional().nullable(),
@@ -111,25 +109,13 @@ export const updateCustomer = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const validatedData = customerUpdateSchema.parse(req.body);
-    const { email, password, name, phone, address } = validatedData;
-
-    if (email) {
-      const existingUser = await prisma.user.findUnique({ where: { email } });
-      if (existingUser && existingUser.id !== parseInt(id as string)) {
-        return res.status(400).json({ message: 'Email sudah digunakan oleh pengguna lain.' });
-      }
-    }
+    const { name, phone, address } = validatedData;
 
     const updateData: any = {
-      email,
       name,
       phone: phone === undefined ? undefined : (phone || null),
       address: address === undefined ? undefined : (address || null),
     };
-
-    if (password) {
-      updateData.password = await bcrypt.hash(password, 10);
-    }
 
     Object.keys(updateData).forEach(key => {
       if (updateData[key] === undefined) {

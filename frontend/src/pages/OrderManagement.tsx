@@ -138,7 +138,7 @@ const OrderManagement: React.FC = () => {
               ) : filteredOrders.length === 0 ? (
                 <tr><td colSpan={5} className="px-6 py-12 text-center text-slate-400">Tidak ada pesanan ditemukan.</td></tr>
               ) : (
-                filteredOrders.map((order) => (
+                filteredOrders.map((order, index) => (
                   <tr key={order.id} className="hover:bg-slate-50/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="font-mono text-sm font-bold text-slate-800">{order.invoiceCode}</div>
@@ -194,7 +194,11 @@ const OrderManagement: React.FC = () => {
                           {activeMenuId === order.id && (
                             <>
                               <div className="fixed inset-0 z-40" onClick={() => setActiveMenuId(null)} />
-                              <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-slate-100 py-1 z-50 text-left">
+                              <div className={`absolute right-0 w-48 bg-white rounded-xl shadow-lg border border-slate-100 py-1 z-50 text-left ${
+                                index >= filteredOrders.length - 2
+                                  ? 'bottom-full mb-2'
+                                  : 'mt-2'
+                              }`}>
                                 <button
                                   onClick={() => {
                                     setSelectedOrder(order);

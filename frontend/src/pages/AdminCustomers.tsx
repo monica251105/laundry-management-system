@@ -83,10 +83,11 @@ const AdminCustomers: React.FC = () => {
       if (formMode === 'CREATE') {
         await api.post('/users/customers', formData);
       } else {
-        const submitData: any = { ...formData };
-        if (!submitData.password) {
-          delete submitData.password;
-        }
+        const submitData = {
+          name: formData.name,
+          phone: formData.phone,
+          address: formData.address
+        };
         await api.put(`/users/customers/${editingId}`, submitData);
       }
       setIsFormOpen(false);
@@ -238,31 +239,34 @@ const AdminCustomers: React.FC = () => {
 
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-1">
-                  Email
+                  Email {formMode === 'EDIT' && <span className="text-xs text-slate-400 font-normal">(Tidak dapat diubah)</span>}
                 </label>
                 <input
                   type="email"
                   required
+                  disabled={formMode === 'EDIT'}
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="input-field"
+                  className={`input-field ${formMode === 'EDIT' ? 'bg-slate-100 border-slate-200 text-slate-500 cursor-not-allowed' : ''}`}
                   placeholder="Masukkan alamat email..."
                 />
               </div>
 
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-1">
-                  Password {formMode === 'EDIT' && <span className="text-xs text-slate-400 font-normal">(Biarkan kosong jika tidak diubah)</span>}
-                </label>
-                <input
-                  type="password"
-                  required={formMode === 'CREATE'}
-                  value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="input-field"
-                  placeholder={formMode === 'CREATE' ? "Masukkan password (min 6 karakter)..." : "Masukkan password baru jika ingin mengubah..."}
-                />
-              </div>
+              {formMode === 'CREATE' && (
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-1">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    required
+                    value={formData.password}
+                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                    className="input-field"
+                    placeholder="Masukkan password (min 6 karakter)..."
+                  />
+                </div>
+              )}
 
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-1">
