@@ -4,6 +4,7 @@ import api from '../api/axiosConfig';
 import { useAuth } from '../context/AuthContext';
 import { Mail, Lock, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import logo from '../assets/logo.png';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -39,9 +40,10 @@ const Login: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         className="glass-card w-full max-w-md p-8 rounded-2xl"
       >
-        <div className="text-center mb-8">
+        <div className="flex flex-col items-center text-center mb-8">
+          <img src={logo} alt="Novita Laundry Logo" className="h-16 w-16 object-contain rounded-2xl shadow-md mb-4 bg-white p-2" />
           <h1 className="text-3xl font-bold text-slate-800">Selamat Datang</h1>
-          <p className="text-slate-600 mt-2">Masuk ke akun LaundryPro Anda</p>
+          <p className="text-slate-600 mt-2">Masuk ke akun Novita Laundry Anda</p>
         </div>
 
         {error && (

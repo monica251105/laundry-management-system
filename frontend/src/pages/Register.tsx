@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import api from '../api/axiosConfig';
 import { User, Mail, Lock, Phone, MapPin, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import logo from '../assets/logo.png';
 
 const Register: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -37,9 +38,10 @@ const Register: React.FC = () => {
         animate={{ opacity: 1, scale: 1 }}
         className="glass-card w-full max-w-lg p-8 rounded-2xl"
       >
-        <div className="text-center mb-8">
+        <div className="flex flex-col items-center text-center mb-8">
+          <img src={logo} alt="Novita Laundry Logo" className="h-16 w-16 object-contain rounded-2xl shadow-md mb-4 bg-white p-2" />
           <h1 className="text-3xl font-bold text-slate-800">Daftar Akun</h1>
-          <p className="text-slate-600 mt-2">Bergabung dengan LaundryPro hari ini</p>
+          <p className="text-slate-600 mt-2">Bergabung dengan Novita Laundry hari ini</p>
         </div>
 
         {error && (

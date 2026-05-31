@@ -3,6 +3,7 @@ import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { LogOut, User, LayoutDashboard, ClipboardList, Settings, Users, PieChart, Menu, X as CloseIcon, DollarSign } from 'lucide-react';
 import NotificationToast from './NotificationToast';
+import logo from '../assets/logo.png';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, logout } = useAuth();
@@ -32,9 +33,14 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       {/* Desktop Sidebar */}
       {user && (
         <aside className="w-64 bg-white border-r border-slate-200 hidden md:flex flex-col sticky top-0 h-screen">
-          <div className="p-6">
-            <h1 className="text-2xl font-bold text-primary-600">LaundryPro</h1>
-            <p className="text-xs text-slate-400 mt-1 uppercase tracking-widest font-bold">Management System</p>
+          <div className="p-6 border-b border-slate-100">
+            <div className="flex items-center gap-3">
+              <img src={logo} alt="Novita Laundry Logo" className="h-10 w-10 object-contain rounded-xl" />
+              <div>
+                <h1 className="text-lg font-black text-slate-800 leading-none">Novita</h1>
+                <span className="text-[11px] text-primary-600 font-black tracking-wider uppercase">Laundry</span>
+              </div>
+            </div>
           </div>
 
           <nav className="flex-1 px-4 py-4 space-y-2">
@@ -75,7 +81,13 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 md:hidden" onClick={() => setIsMobileMenuOpen(false)}>
           <aside className="w-64 bg-white h-full shadow-2xl flex flex-col" onClick={e => e.stopPropagation()}>
             <div className="p-6 flex justify-between items-center border-b border-slate-100">
-              <h1 className="text-xl font-bold text-primary-600">LaundryPro</h1>
+              <div className="flex items-center gap-2">
+                <img src={logo} alt="Novita Laundry Logo" className="h-8 w-8 object-contain rounded-lg" />
+                <div>
+                  <h1 className="text-sm font-black text-slate-800 leading-none">Novita</h1>
+                  <span className="text-[9px] text-primary-600 font-black tracking-wider uppercase">Laundry</span>
+                </div>
+              </div>
               <button onClick={() => setIsMobileMenuOpen(false)} className="text-slate-500">
                 <CloseIcon size={24} />
               </button>
@@ -104,11 +116,17 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       {/* Main Content */}
       <main className="flex-1 flex flex-col min-w-0 h-screen">
         {/* Mobile Header */}
-        <header className="md:hidden bg-white border-b border-slate-200 p-4 flex justify-between items-center sticky top-0 z-40">
+        <header className="md:hidden bg-white border-b border-slate-200 px-4 py-3 flex justify-between items-center sticky top-0 z-40">
           <button onClick={() => setIsMobileMenuOpen(true)} className="text-slate-600 p-2">
             <Menu size={24} />
           </button>
-          <h1 className="text-xl font-bold text-primary-600">LaundryPro</h1>
+          <div className="flex items-center gap-2">
+            <img src={logo} alt="Novita Laundry Logo" className="h-8 w-8 object-contain rounded-lg" />
+            <div>
+              <h1 className="text-sm font-black text-slate-800 leading-none">Novita</h1>
+              <span className="text-[9px] text-primary-600 font-black tracking-wider uppercase">Laundry</span>
+            </div>
+          </div>
           <div className="w-10"></div> {/* Spacer */}
         </header>
 
